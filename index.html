@@ -2,13 +2,13 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Naty Dev · Front End</title>
     <!-- Fontes modernas -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    <!-- Ícones (Font Awesome) -->
+    <!-- Ícones (Font Awesome 6) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -26,10 +26,11 @@
             --text-secondary: #4A5568;
             --accent-primary: #4A6FA5;
             --accent-secondary: #E8C39E;
-            --accent-soft: rgba(232, 195, 158, 0.2);
+            --accent-soft: rgba(74, 111, 165, 0.12);
             --header-bg: rgba(255, 240, 245, 0.7);
             --card-shadow: rgba(74, 111, 165, 0.1);
             --border-color: rgba(232, 195, 158, 0.3);
+            --icon-bg: rgba(74, 111, 165, 0.08);
         }
 
         /* Tema escuro */
@@ -38,12 +39,13 @@
             --bg-secondary: #2a2c42;
             --text-primary: #e1e1e6;
             --text-secondary: #c4c4cc;
-            --accent-primary: #6d8fc6;
-            --accent-secondary: #d4b68a;
-            --accent-soft: rgba(109, 143, 198, 0.2);
+            --accent-primary: #8aabdf;
+            --accent-secondary: #e8c39e;
+            --accent-soft: rgba(138, 171, 223, 0.2);
             --header-bg: rgba(26, 27, 47, 0.8);
             --card-shadow: rgba(0, 0, 0, 0.3);
-            --border-color: rgba(109, 143, 198, 0.3);
+            --border-color: rgba(138, 171, 223, 0.3);
+            --icon-bg: rgba(138, 171, 223, 0.15);
         }
 
         body {
@@ -55,7 +57,6 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* barrinha de rolagem personalizada */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -70,14 +71,12 @@
             background: var(--accent-primary);
         }
 
-        /* container padrão */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
-        /* animações de entrada */
         @keyframes fadeUp {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -102,7 +101,6 @@
             animation: fadeUp 0.8s ease-out;
         }
 
-        /* header flutuante */
         header {
             position: sticky;
             top: 20px;
@@ -173,7 +171,6 @@
             color: var(--accent-primary);
         }
 
-        /* Botão de tema */
         .theme-toggle {
             background: var(--accent-soft);
             border: 1px solid var(--border-color);
@@ -194,19 +191,12 @@
             color: var(--accent-primary);
             transition: 0.3s;
         }
-        .theme-toggle:hover i {
-            color: var(--bg-primary);
-        }
         .theme-toggle span {
             font-size: 0.9rem;
             font-weight: 500;
             color: var(--text-primary);
         }
-        .theme-toggle:hover span {
-            color: var(--bg-primary);
-        }
 
-        /* HERO SECTION */
         .hero {
             min-height: 85vh;
             display: flex;
@@ -249,7 +239,6 @@
             display: inline-block;
             padding: 6px 20px;
             border-radius: 40px;
-            backdrop-filter: blur(4px);
         }
         .hero-desc {
             font-size: 1.1rem;
@@ -293,7 +282,6 @@
             transform: translateY(-4px);
         }
 
-        /* foto / avatar */
         .hero-avatar {
             display: flex;
             justify-content: center;
@@ -313,14 +301,12 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(0%) contrast(1.05);
             transition: transform 0.4s;
         }
         .avatar-frame:hover img {
             transform: scale(1.05);
         }
 
-        /* seções */
         .section-title {
             font-size: 2.3rem;
             font-weight: 600;
@@ -340,187 +326,118 @@
             border-radius: 4px;
         }
 
-/* SKILLS - CARDS INTERATIVOS (CORRIGIDO PARA CELULAR) */
-.skills-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-bottom: 40px;
-}
-
-.skill-category-card {
-    background: var(--bg-secondary);
-    border-radius: 40px;
-    overflow: hidden;
-    box-shadow: 0 15px 30px -12px var(--card-shadow);
-    border: 1px solid var(--border-color);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: pointer;
-    position: relative;
-}
-
-/* Removido o scale que causava problemas no mobile */
-.skill-category-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 30px 45px -15px var(--accent-primary);
-    border-color: var(--accent-primary);
-}
-
-.skill-category-header {
-    padding: 25px 20px;
-    text-align: center;
-    color: white;
-    transition: all 0.3s ease;
-}
-
-.skill-category-header i {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-.skill-category-card:hover .skill-category-header i {
-    transform: scale(1.1) rotate(5deg);
-}
-
-.skill-category-header h3 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin: 5px 0;
-    letter-spacing: -0.5px;
-}
-
-/* CORREÇÃO: max-height baseado em viewport height para mobile */
-.skill-items {
-    max-height: 0;
-    opacity: 0;
-    padding: 0 15px;
-    transition: all 0.4s ease;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.skill-category-card:hover .skill-items {
-    max-height: 500px; /* Valor alto o suficiente para qualquer conteúdo */
-    opacity: 1;
-    padding: 20px 15px 25px;
-    pointer-events: all;
-}
-
-.skill-item {
-    background: var(--accent-soft);
-    color: var(--text-primary);
-    padding: 8px 16px;
-    border-radius: 30px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-    border: 1px solid transparent;
-    cursor: default;
-    flex: 0 1 auto; /* Não força tamanho fixo */
-}
-
-.skill-item i {
-    color: var(--accent-primary);
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-}
-
-.skill-item:hover {
-    background: var(--accent-primary);
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px -8px var(--accent-primary);
-    border-color: white;
-}
-
-.skill-item:hover i {
-    color: white;
-    transform: scale(1.1);
-}
-
-/* Soft Skills - ajustado para mobile */
-.soft-skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 20px;
-    justify-content: center; /* Centraliza no mobile */
-}
-
-.soft-badge {
-    background: var(--accent-soft);
-    padding: 10px 20px;
-    border-radius: 50px;
-    font-weight: 500;
-    color: var(--text-primary);
-    transition: all 0.3s ease;
-    border: 1px solid var(--border-color);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.95rem;
-    box-shadow: 0 4px 12px var(--card-shadow);
-    cursor: default;
-    flex: 0 1 auto;
-}
-
-.soft-badge i {
-    color: var(--accent-primary);
-    transition: all 0.3s ease;
-    font-size: 1.1rem;
-}
-
-.soft-badge:hover {
-    background: var(--accent-primary);
-    color: white;
-    transform: translateY(-5px);
-    box-shadow: 0 15px 25px -10px var(--accent-primary);
-    border-color: white;
-}
-
-.soft-badge:hover i {
-    color: white;
-    transform: scale(1.1);
-}
-
-/* Responsividade específica para mobile */
-@media (max-width: 600px) {
-    .skills-cards-grid {
-        gap: 20px;
-    }
-    
-    .skill-category-header {
-        padding: 20px 15px;
-    }
-    
-    .skill-category-header i {
-        font-size: 2.5rem;
-    }
-    
-    .skill-category-header h3 {
-        font-size: 1.5rem;
-    }
-    
-    .skill-item {
-        padding: 6px 12px;
-        font-size: 0.85rem;
-    }
-    
-    .soft-badge {
-        padding: 8px 16px;
-        font-size: 0.85rem;
-    }
-}
-
+        /* ========= NOVA SEÇÃO DE HABILIDADES APENAS ÍCONES ========= */
+        .skills-symbols-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0 3rem;
+        }
+        
+        .skill-icon-card {
+            background: var(--bg-secondary);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1.5rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            width: 110px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 20px -5px var(--card-shadow);
+            cursor: default;
+        }
+        
+        .skill-icon-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: var(--accent-primary);
+            box-shadow: 0 25px 30px -12px var(--accent-primary);
+            background: var(--accent-soft);
+        }
+        
+        .skill-icon-card i {
+            font-size: 4rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .skill-icon-card:hover i {
+            transform: scale(1.1);
+        }
+        
+        /* Cores específicas para ícones (mantém identidade) */
+        .skill-icon-card .fa-html5 { color: #E44D26; }
+        .skill-icon-card .fa-css3-alt { color: #264de4; }
+        .skill-icon-card .fa-js { color: #F7DF1E; text-shadow: 0 0 2px rgba(0,0,0,0.2); }
+        .skill-icon-card .fa-react { color: #61DAFB; }
+        .skill-icon-card .fa-figma { color: #F24E1E; }
+        .skill-icon-card .fa-git-alt { color: #F05032; }
+        .skill-icon-card .fa-github { color: var(--text-primary); }
+        .skill-icon-card .fa-bootstrap { color: #7952B3; }
+        .skill-icon-card .fa-palette { color: #D65F2E; }
+        .skill-icon-card .fa-terminal { color: #4EAA25; }
+        
+        [data-theme="dark"] .skill-icon-card .fa-github {
+            color: #f0f0f0;
+        }
+        
+        .skill-icon-card span {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            background: var(--accent-soft);
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            color: var(--text-primary);
+            font-family: "Fira Code", monospace;
+        }
+        
+        /* Soft skills badges modernos mantidos */
+        .soft-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+        
+        .soft-badge {
+            background: var(--accent-soft);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px var(--card-shadow);
+            cursor: default;
+        }
+        
+        .soft-badge i {
+            color: var(--accent-primary);
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+        
+        .soft-badge:hover {
+            background: var(--accent-primary);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px -10px var(--accent-primary);
+            border-color: white;
+        }
+        
+        .soft-badge:hover i {
+            color: white;
+        }
+        
         /* projetos */
         .projetos-grid {
             display: grid;
@@ -535,7 +452,6 @@
             box-shadow: 0 20px 35px -10px var(--card-shadow);
             transition: all 0.3s;
             border: 1px solid var(--border-color);
-            backdrop-filter: blur(4px);
         }
         .projeto-card:hover {
             transform: translateY(-15px);
@@ -671,7 +587,6 @@
             font-size: 0.95rem;
         }
 
-        /* responsividade */
         @media (max-width: 800px) {
             .hero-grid {
                 grid-template-columns: 1fr;
@@ -708,11 +623,33 @@
             .theme-toggle {
                 padding: 8px 12px;
             }
-            .skills-cards-grid {
-                grid-template-columns: 1fr;
+            .skill-icon-card {
+                width: 85px;
+                padding: 1rem 0.5rem;
+            }
+            .skill-icon-card i {
+                font-size: 2.8rem;
+            }
+            .skill-icon-card span {
+                font-size: 0.65rem;
+            }
+            .skills-symbols-container {
+                gap: 1rem;
             }
         }
         
+        @media (max-width: 560px) {
+            .skills-symbols-container {
+                gap: 0.8rem;
+            }
+            .skill-icon-card {
+                width: 75px;
+                padding: 0.8rem 0.2rem;
+            }
+            .skill-icon-card i {
+                font-size: 2.4rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -728,7 +665,6 @@
                 <a href="#jornada">Jornada</a>
                 <a href="#contato">Contato</a>
             </div>
-            <!-- Botão de tema -->
             <div class="theme-toggle" id="themeToggle">
                 <i class="fas fa-sun"></i>
                 <span>Tema</span>
@@ -744,117 +680,88 @@
                     <p class="hero-sub">&lt;front-end developer/&gt;</p>
                     <h1>Olá, eu sou <span>Natália Martins</span></h1>
                     <p class="hero-desc">
-                        Estudante de Engenharia de Software com foco em Front-End Development. Transformo layouts em interfaces modernas e responsivas utilizando HTML, CSS e JavaScript, com atenção à experiência do usuário e boas práticas de desenvolvimento.
+                    Transformo layouts em interfaces modernas e responsivas utilizando HTML, CSS e JavaScript, com atenção à experiência do usuário.
                     </p>
                     <div class="cta-group">
                         <a href="#projetos" class="btn btn-primary">Ver projetos <i class="fa-regular fa-eye" style="margin-left: 8px;"></i></a>
-                        <a href="/curriculo/curriculo.pdf" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Currículo <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left: 5px; font-size: 0.9rem;"></i></a>
+                        <a href="#" class="btn btn-outline" target="_blank">Currículo <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left: 5px;"></i></a>
                     </div>
                 </div>
                 <div class="hero-avatar">
                     <div class="avatar-frame">
-                        <!-- Sua foto -->
-                        <img src="/img/perfil.png" alt="Foto de Natália">
+                        <img src="img/perfil.png" alt="Foto de Natália">
                     </div>
                 </div>
             </div>
         </section>
 
-    <!-- SOBRE -->
-<section id="sobre" class="container" style="margin: 40px auto;">
-    <h2 class="section-title">Sobre mim</h2>
-    <div style="background: var(--bg-secondary); border-radius: 48px; padding: 40px; box-shadow: 0 15px 30px -10px var(--card-shadow); border:1px solid var(--border-color);">
-        
-        <p style="font-size: 1.2rem; max-width: 800px; color: var(--text-primary);">
-            Sou estudante de <strong>Engenharia de Software</strong> apaixonada por tecnologia e desenvolvimento web. 
-            Gosto de criar interfaces que não apenas funcionem bem, mas que também proporcionem uma experiência clara, intuitiva e agradável para quem usa.
-        </p>
-
-        <p style="font-size: 1.2rem; max-width: 800px; color: var(--text-primary); margin-top: 20px;">
-            Atualmente estou direcionando meus estudos para o <strong>desenvolvimento Front-End</strong>, focando na criação de interfaces modernas, responsivas e acessíveis utilizando <strong>HTML, CSS e JavaScript</strong>.
-        </p>
-
-        <p style="font-size: 1.2rem; max-width: 800px; color: var(--text-primary); margin-top: 20px;">
-            Estou sempre buscando evoluir como desenvolvedora, aprendendo novas tecnologias, boas práticas de programação e maneiras de construir aplicações cada vez mais bem estruturadas.
-        </p>
-
-        <p style="margin-top: 24px; color: var(--accent-primary);">
-            <i class="fa-regular fa-star" style="color: var(--accent-secondary);"></i> 
-            <strong>Disciplinas favoritas:</strong> Estrutura de Dados, Programação Orientada a Objetos, Banco de Dados e Desenvolvimento Web.
-        </p>
-
-    </div>
-</section>
-
-        <!-- SKILLS -->
-<section id="skills" class="container" style="margin: 80px auto;">
-    <h2 class="section-title">Habilidades</h2>
-    
-    <div class="skills-cards-grid">
-        <!-- Card Front-end Principal -->
-        <div class="skill-category-card">
-            <div class="skill-category-header" style="background: linear-gradient(135deg, #4A6FA5, #6d8fc6);">
-                <i class="fas fa-code"></i>
-                <h3>Front-end</h3>
-                <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 5px;">Tecnologias que domino</p>
+        <!-- SOBRE -->
+        <section id="sobre" class="container" style="margin: 40px auto;">
+            <h2 class="section-title">Sobre mim</h2>
+            <div style="background: var(--bg-secondary); border-radius: 48px; padding: 40px; box-shadow: 0 15px 30px -10px var(--card-shadow); border:1px solid var(--border-color);">
+                <p style="font-size: 1.2rem; max-width: 800px; color: var(--text-primary);">
+                    Sou estudante de <strong>Engenharia de Software</strong> apaixonada por tecnologia e desenvolvimento web. 
+                    Gosto de criar interfaces que não apenas funcionem bem, mas que também proporcionem uma experiência clara e intuitiva.
+                </p>
+                <p style="font-size: 1.2rem; max-width: 800px; color: var(--text-primary); margin-top: 20px;">
+                    Atualmente direciono meus estudos para o <strong>desenvolvimento Front-End</strong>, criando interfaces modernas e responsivas utilizando <strong>HTML, CSS e JavaScript</strong>.
+                </p>
+                <p style="margin-top: 24px; color: var(--accent-primary);">
+                    <i class="fa-regular fa-star" style="color: var(--accent-secondary);"></i> 
+                    <strong>Disciplinas favoritas:</strong> Estrutura de Dados, POO, Banco de Dados e Desenvolvimento Web.
+                </p>
             </div>
-            <div class="skill-items">
-                <span class="skill-item"><i class="fab fa-html5"></i> HTML5</span>
-                <span class="skill-item"><i class="fab fa-css3-alt"></i> CSS3</span>
-                <span class="skill-item"><i class="fab fa-js"></i> JavaScript</span>
-                <span class="skill-item"><i class="fab fa-react"></i> React</span>
-                <span class="skill-item"><i class="fas fa-mobile-alt"></i> Responsividade</span>
-                <span class="skill-item"><i class="fab fa-bootstrap"></i> Bootstrap</span>
-            </div>
-        </div>
+        </section>
 
-        <!-- Card UI/UX Design -->
-        <div class="skill-category-card">
-            <div class="skill-category-header" style="background: linear-gradient(135deg, #E8C39E, #d4b68a);">
-                <i class="fas fa-paint-brush"></i>
-                <h3>UI/UX Design</h3>
-                <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 5px;">Design e prototipagem</p>
+        <!-- SKILLS - APENAS SÍMBOLOS DAS LINGUAGENS E FERRAMENTAS (SEM TEXTOS EXCETO PEQUENO LABEL) -->
+        <section id="skills" class="container" style="margin: 80px auto;">
+            <h2 class="section-title">Habilidades</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-secondary); font-size: 1.1rem;">
+                Tecnologias e ferramentas que utilizo no dia a dia
+            </p>
+            
+            <!-- GRID SOMENTE COM ÍCONES GRANDES E NOME SIMBÓLICO (apenas texto técnico pequeno) -->
+            <div class="skills-symbols-container">
+                <div class="skill-icon-card">
+                    <i class="fab fa-html5"></i>
+                    <span>HTML5</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-css3-alt"></i>
+                    <span>CSS3</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-js"></i>
+                    <span>JS</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-git-alt"></i>
+                    <span>Git</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-bootstrap"></i>
+                    <span>Bootstrap</span>
+                </div>
             </div>
-            <div class="skill-items">
-                <span class="skill-item"><i class="fab fa-figma"></i> Figma</span>
-                <span class="skill-item"><i class="fas fa-palette"></i> Design System</span>
-                <span class="skill-item"><i class="fas fa-mouse-pointer"></i> Prototipagem</span>
-                <span class="skill-item"><i class="fas fa-universal-access"></i> Acessibilidade</span>
-            </div>
-        </div>
 
-        <!-- Card Ferramentas Front-end -->
-        <div class="skill-category-card">
-            <div class="skill-category-header" style="background: linear-gradient(135deg, #2C3E4F, #1a1b2f);">
-                <i class="fas fa-tools"></i>
-                <h3>Ferramentas</h3>
-                <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 5px;">Versionamento e desenvolvimento</p>
+            <!-- Soft Skills permanecem como badges interativos -->
+            <h3 style="font-size: 1.8rem; color: var(--text-primary); margin: 60px 0 20px; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap:wrap;">
+                <i class="fas fa-users" style="color: var(--accent-primary);"></i> Soft Skills
+            </h3>
+            <div class="soft-skills">
+                <span class="soft-badge"><i class="fa-regular fa-comments"></i> Trabalho em equipe</span>
+                <span class="soft-badge"><i class="fa-regular fa-lightbulb"></i> Resolução de problemas</span>
+                <span class="soft-badge"><i class="fa-regular fa-message"></i> Comunicação</span>
+                <span class="soft-badge"><i class="fa-regular fa-clock"></i> Organização</span>
+                <span class="soft-badge"><i class="fas fa-chart-line"></i> Metodologias Ágeis</span>
+                <span class="soft-badge"><i class="fa-regular fa-face-smile"></i> Criatividade</span>
+                <span class="soft-badge"><i class="fa-regular fa-eye"></i> Atenção aos detalhes</span>
             </div>
-            <div class="skill-items">
-                <span class="skill-item"><i class="fab fa-git-alt"></i> Git</span>
-                <span class="skill-item"><i class="fab fa-github"></i> GitHub</span>
-                <span class="skill-item"><i class="fas fa-code"></i> VS Code</span>
-                <span class="skill-item"><i class="fab fa-chrome"></i> DevTools</span>
-                <span class="skill-item"><i class="fas fa-terminal"></i> Terminal</span>
-                <span class="skill-item"><i class="fab fa-npm"></i> NPM</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Soft Skills (mantive igual) -->
-    <h3 style="font-size: 1.8rem; color: var(--text-primary); margin: 60px 0 20px; display: flex; align-items: center; gap: 10px;">
-        <i class="fas fa-users" style="color: var(--accent-primary);"></i> Soft Skills
-    </h3>
-    <div class="soft-skills">
-        <span class="soft-badge"><i class="fa-regular fa-comments"></i> Trabalho em equipe</span>
-        <span class="soft-badge"><i class="fa-regular fa-lightbulb"></i> Resolução de problemas</span>
-        <span class="soft-badge"><i class="fa-regular fa-message"></i> Comunicação</span>
-        <span class="soft-badge"><i class="fa-regular fa-clock"></i> Organização</span>
-        <span class="soft-badge"><i class="fas fa-chart-line"></i> Metodologias Ágeis</span>
-        <span class="soft-badge"><i class="fa-regular fa-face-smile"></i> Criatividade</span>
-        <span class="soft-badge"><i class="fa-regular fa-eye"></i> Atenção aos detalhes</span>
-    </div>
-</section>
+        </section>
 
         <!-- PROJETOS -->
         <section id="projetos" class="container" style="margin: 80px auto;">
@@ -864,70 +771,41 @@
                     <h3 style="font-size: 1.7rem; color: var(--text-primary);">Diário da Moda</h3>
                     <p style="color: var(--text-secondary); margin: 8px 0;">Projeto desenvolvido durante a Imersão DEV da Alura, com foco em pesquisa de estilos de moda e visualização de looks inspiradores.</p>
                     <div class="projeto-tags">
-                         <span class="tag">HTML</span>
+                        <span class="tag">HTML</span>
                         <span class="tag">CSS</span>
                         <span class="tag">JavaScript</span>
                     </div>
                     <div class="projeto-links">
-                        <a href="https://github.com/natymartinsgit/ImersaoDEV-Alura" target="_blank" rel="noopener noreferrer">
-<i class="fab fa-github"></i> Código
-</a>
-
-<a href="https://natymartinsgit.github.io/ImersaoDEV-Alura/" target="_blank" rel="noopener noreferrer">
-<i class="fa-solid fa-arrow-up-right-from-square"></i> Demo
-</a>
+                        <a href="https://github.com/natymartinsgit/ImersaoDEV-Alura" target="_blank"><i class="fab fa-github"></i> Código</a>
+                        <a href="https://natymartinsgit.github.io/ImersaoDEV-Alura/" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
                     </div>
                 </div>
                 <div class="projeto-card">
                     <h3 style="font-size: 1.7rem; color: var(--text-primary);">Jogo do Número Secreto</h3>
-                    <p style="color: var(--text-secondary);">O projeto consiste em um jogo interativo onde o usuário precisa descobrir um número secreto gerado pelo sistema, recebendo feedback a cada tentativa.</p>
+                    <p style="color: var(--text-secondary);">Jogo interativo onde o usuário precisa descobrir um número secreto gerado pelo sistema, recebendo feedback a cada tentativa.</p>
                     <div class="projeto-tags">
                         <span class="tag">HTML</span>
                         <span class="tag">CSS</span>
                         <span class="tag">JavaScript</span>
                     </div>
                     <div class="projeto-links">
-                        <a href="https://github.com/natymartinsgit/Jogo_do_numero-secreto_ALURA/" target="_blank" rel="noopener noreferrer">
-<i class="fab fa-github"></i> Código
-</a>
-
-<a href="https://natymartinsgit.github.io/Jogo_do_numero-secreto_ALURA/" target="_blank" rel="noopener noreferrer">
-<i class="fa-solid fa-arrow-up-right-from-square"></i> Demo
-</a>
+                        <a href="https://github.com/natymartinsgit/Jogo_do_numero-secreto_ALURA/" target="_blank"><i class="fab fa-github"></i> Código</a>
+                        <a href="https://natymartinsgit.github.io/Jogo_do_numero-secreto_ALURA/" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- JORNADA -->
-<section id="jornada" class="container" style="margin: 80px auto;">
-    <h2 class="section-title">Jornada acadêmica</h2>
-    <div class="timeline">
-        <div class="timeline-item">
-            <span class="timeline-year">2023</span>
-            <h3 style="color: var(--text-primary);">Ensino Médio</h3>
-            <p style="color: var(--text-secondary);">Conclusão do ensino médio e primeiro contato com programação.</p>
-        </div>
-
-        <div class="timeline-item">
-            <span class="timeline-year">2024 → 2028</span>
-            <h3 style="color: var(--text-primary);">Engenharia de Software</h3>
-            <p style="color: var(--text-secondary);">Início da graduação em Engenharia de Software.</p>
-        </div>
-        <div class="timeline-item">
-            <span class="timeline-year">2025</span>
-            <h3 style="color: var(--text-primary);">ADS - Concluído</h3>
-            <p style="color: var(--text-secondary);">Formação em Análise e Desenvolvimento de Sistemas.</p>
-        </div>
-
-        <div class="timeline-item">
-            <span class="timeline-year">2026</span>
-            <h3 style="color: var(--text-primary);">Foco em front-end</h3>
-            <p style="color: var(--text-secondary);">Estudos direcionados para desenvolvimento front-end.</p>
-        </div>
-    </div>
-    
-</section>
+        <section id="jornada" class="container" style="margin: 80px auto;">
+            <h2 class="section-title">Jornada acadêmica</h2>
+            <div class="timeline">
+                <div class="timeline-item"><span class="timeline-year">2023</span><h3>Ensino Médio</h3><p>Conclusão e primeiro contato com programação.</p></div>
+                <div class="timeline-item"><span class="timeline-year">2024 → 2028</span><h3>Engenharia de Software</h3><p>Início da graduação em Engenharia de Software.</p></div>
+                <div class="timeline-item"><span class="timeline-year">2025</span><h3>ADS - Concluído</h3><p>Formação em Análise e Desenvolvimento de Sistemas.</p></div>
+                <div class="timeline-item"><span class="timeline-year">2026</span><h3>Foco em front-end</h3><p>Estudos direcionados para desenvolvimento front-end.</p></div>
+            </div>
+        </section>
 
         <!-- CONTATO -->
         <section id="contato" class="container" style="margin: 80px auto;">
@@ -935,8 +813,8 @@
             <div class="contato-flex">
                 <div class="social-links">
                     <a href="https://github.com/natymartinsgit" class="social-icon" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="www.linkedin.com/in/natáliamartinsnatymartins" class="social-icon" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="naty_martins01@zohomail.com" class="social-icon" target="_blank"><i class="fa-regular fa-envelope"></i></a>
+                    <a href="https://linkedin.com/in/natáliamartinsnatymartins" class="social-icon" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:naty_martins01@zohomail.com" class="social-icon" target="_blank"><i class="fa-regular fa-envelope"></i></a>
                 </div>
                 <div class="email-box">
                     <i class="fa-regular fa-paper-plane"></i>
@@ -951,7 +829,6 @@
     </footer>
 
     <script>
-        // Suavizar clique nos links internos
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -960,33 +837,19 @@
             });
         });
 
-        // Sistema de tema (claro/escuro)
         const themeToggle = document.getElementById('themeToggle');
         const icon = themeToggle.querySelector('i');
-        
-        // Verificar preferência salva
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             document.documentElement.setAttribute('data-theme', savedTheme);
             updateIcon(savedTheme);
         }
-
         function updateIcon(theme) {
-            if (theme === 'dark') {
-                icon.className = 'fas fa-moon';
-            } else {
-                icon.className = 'fas fa-sun';
-            }
+            icon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
         }
-
         themeToggle.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
-            let newTheme = 'light';
-            
-            if (currentTheme !== 'dark') {
-                newTheme = 'dark';
-            }
-            
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateIcon(newTheme);
